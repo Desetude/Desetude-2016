@@ -17,5 +17,9 @@ public class DevathonPlugin extends JavaPlugin {
     public void onDisable() {
     }
 
+    public static DevathonPlugin get() {
+        return JavaPlugin.getPlugin(DevathonPlugin.class);
+    }
+
 }
 

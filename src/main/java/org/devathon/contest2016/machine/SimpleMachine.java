@@ -6,13 +6,16 @@ import org.devathon.contest2016.menu.Rows;
 import org.devathon.contest2016.menus.SimpleMachineMenu;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class SimpleMachine implements Machine {
 
     private final String title;
     private final Set<Process> processes;
-    private int fuelLevel;
+    private Process currentProcess;
+    private long currentProgress;
+    private long fuelLevel;
 
     public SimpleMachine(String title) {
         this.title = title;
@@ -34,12 +37,38 @@ public class SimpleMachine implements Machine {
         return this.processes;
     }
 
-    @Override public int getFuelLevel() {
+    @Override
+    public Optional<Process> getCurrentProcess() {
+        return Optional.ofNullable(this.currentProcess);
+    }
+
+    @Override
+    public void setCurrentProcess(Process process) {
+        this.currentProcess = process;
+    }
+
+    @Override
+    public long getCurrentProgress() {
+        return this.currentProgress;
+    }
+
+    @Override
+    public void incrementProgress() {
+        this.currentProgress++;
+    }
+
+    @Override
+    public void resetProcess() {
+        this.currentProcess = null;
+        this.currentProgress = 0;
+    }
+
+    @Override public long getFuelLevel() {
         return this.fuelLevel;
     }
 
     @Override public void open(Player player) {
-        new SimpleMachineMenu(player, Rows.SIX, this.title).open();
+        new SimpleMachineMenu(this, player, Rows.SIX, this.title).open();
     }
 
 }

@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.devathon.contest2016.menu.MenuHolder;
 import org.devathon.contest2016.menu.MenuItemClickEvent;
 import org.devathon.contest2016.menu.Rows;
@@ -43,10 +44,18 @@ public abstract class Menu {
         }
     }
 
+    public final void updateItem(int index) {
+        this.updateItem(index, this.menuItems.get(index));
+    }
+
+    public final void updateItem(int index, MenuItem menuItem) {
+        this.inventory.setItem(index, menuItem.getIcon().get());
+    }
+
     public final void updateItems() {
         if (this.inventory != null) {
             for (Map.Entry<Integer, MenuItem> entry : this.menuItems.entrySet()) {
-                this.inventory.setItem(entry.getKey(), entry.getValue().getIcon().get());
+                this.updateItem(entry.getKey(), entry.getValue());
             }
         }
     }
@@ -83,6 +92,14 @@ public abstract class Menu {
     }
 
     public void onClose() {
+    }
+
+    public static Optional<Menu> getFromInventory(Inventory inventory) {
+        if(!(inventory.getHolder() instanceof MenuHolder)) {
+            return Optional.empty();
+        }
+
+        return Optional.of(((MenuHolder) inventory.getHolder()).getMenu());
     }
 
 }

@@ -12,13 +12,11 @@ public class CompressorMachine extends SimpleMachine {
         super("Compressor");
 
         this.addProcess(Process.create(
-                new ItemStackBuilder()
-                        .material(Material.IRON_ORE)
-                        .build(),
+                Material.IRON_ORE,
                 new ItemStackBuilder()
                         .material(Material.IRON_INGOT)
                         .build(),
-                80));
+                200));
     }
 
 }
