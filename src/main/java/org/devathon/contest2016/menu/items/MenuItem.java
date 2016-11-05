@@ -33,11 +33,13 @@ public class MenuItem {
     }
 
     public static MenuItem create(Supplier<ItemStack> icon) {
-        return create(icon, () -> {});
+        return create(icon, () -> {
+        });
     }
 
     public static MenuItem create(ItemStack icon) {
-        return create(() -> icon, () -> {});
+        return create(() -> icon, () -> {
+        });
     }
 
     public void onClick(MenuItemClickEvent event) {

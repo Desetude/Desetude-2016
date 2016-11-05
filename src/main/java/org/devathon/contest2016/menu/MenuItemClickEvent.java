@@ -23,6 +23,10 @@ public class MenuItemClickEvent extends Event {
         this.clickType = clickType;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     public Player getPlayer() {
         return this.player;
     }
@@ -41,10 +45,6 @@ public class MenuItemClickEvent extends Event {
 
     @Override
     public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static HandlerList getHandlerList() {
         return handlers;
     }
 

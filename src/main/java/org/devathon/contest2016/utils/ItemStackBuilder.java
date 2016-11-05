@@ -2,12 +2,15 @@ package org.devathon.contest2016.utils;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import net.minecraft.server.v1_10_R1.NBTTagCompound;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ItemStackBuilder {
 
@@ -17,9 +20,11 @@ public class ItemStackBuilder {
     private int data;
     private int amount;
     private ItemMeta itemMeta;
+    private Map<String, String> stringTags;
 
     public ItemStackBuilder() {
         this.amount = 1;
+        this.stringTags = new HashMap<>();
     }
 
     public ItemStackBuilder(ItemStack itemStack) {
@@ -30,6 +35,7 @@ public class ItemStackBuilder {
 
         this.lore = this.itemMeta.getLore();
         this.name = this.itemMeta.getDisplayName();
+        this.stringTags = new HashMap<>();
     }
 
     public ItemStackBuilder material(Material material) {
@@ -67,6 +73,11 @@ public class ItemStackBuilder {
         return this;
     }
 
+    public ItemStackBuilder stringTag(String key, String value) {
+        this.stringTags.put(key, value);
+        return this;
+    }
+
     public ItemStack build() {
         checkNotNull(this.material, "Can not build an item stack with no material set.");
         ItemStack itemStack = new ItemStack(this.material, this.amount, (short) this.data);
@@ -87,6 +98,17 @@ public class ItemStackBuilder {
         }
 
         itemStack.setItemMeta(itemMeta);
+
+        itemStack = NMSUtils.getCraftCopy(itemStack);
+        net.minecraft.server.v1_10_R1.ItemStack nmsItem = NMSUtils.getNMS(itemStack);
+        NBTTagCompound comp = NBTUtils.getTag(nmsItem);
+        for (Map.Entry<String, String> tag : this.stringTags.entrySet()) {
+            comp.setString(tag.getKey(), tag.getValue());
+        }
+
+        nmsItem.setTag(comp);
+        itemStack = NMSUtils.getCraftMirror(nmsItem);
+
         return itemStack;
     }
 

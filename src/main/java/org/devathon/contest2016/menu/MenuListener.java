@@ -21,8 +21,8 @@ public class MenuListener implements Listener {
         }
 
         InventoryHolder holder = inventory.getHolder();
-        if(!(holder instanceof MenuHolder)) {
-            if(event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY && //Put into menu from player inventory
+        if (!(holder instanceof MenuHolder)) {
+            if (event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY && //Put into menu from player inventory
                     event.getWhoClicked().getOpenInventory().getTopInventory().getHolder() instanceof MenuHolder) {
                 event.setCancelled(true);
             }
@@ -52,13 +52,13 @@ public class MenuListener implements Listener {
         }
 
         InventoryHolder holder = inventory.getHolder();
-        if(!(holder instanceof MenuHolder)) {
+        if (!(holder instanceof MenuHolder)) {
             return;
         }
 
         Menu menu = ((MenuHolder) holder).getMenu();
         for (int slot : event.getRawSlots()) {
-            if(!menu.isMoveableSlot(slot)) {
+            if (!menu.isMoveableSlot(slot)) {
                 event.setCancelled(true);
                 return;
             }

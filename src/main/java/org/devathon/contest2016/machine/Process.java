@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class Process {
 
@@ -24,7 +23,7 @@ public class Process {
 
     public static Process create(Material material, ItemStack output, long processingPower) {
         return create(item -> {
-            if(item.getType().equals(material)) {
+            if (item.getType().equals(material)) {
                 return 1;
             }
 

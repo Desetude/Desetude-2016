@@ -4,13 +4,11 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.devathon.contest2016.menu.MenuHolder;
 import org.devathon.contest2016.menu.MenuItemClickEvent;
 import org.devathon.contest2016.menu.Rows;
 import org.devathon.contest2016.menu.items.MenuItem;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -19,7 +17,6 @@ import java.util.Set;
 
 public abstract class Menu {
 
-    protected final Player player;
     protected final Rows rows;
     protected final String title;
     protected final Map<Integer, MenuItem> menuItems;
@@ -27,13 +24,20 @@ public abstract class Menu {
 
     protected Inventory inventory;
 
-    public Menu(Player player, Rows rows, String title) {
-        this.player = player;
+    public Menu(Rows rows, String title) {
         this.rows = rows;
         this.title = title;
 
         this.menuItems = new HashMap<>();
         this.moveableSlots = new HashSet<>();
+    }
+
+    public static Optional<Menu> getFromInventory(Inventory inventory) {
+        if (!(inventory.getHolder() instanceof MenuHolder)) {
+            return Optional.empty();
+        }
+
+        return Optional.of(((MenuHolder) inventory.getHolder()).getMenu());
     }
 
     public void onItemClick(MenuItemClickEvent event) {
@@ -78,28 +82,26 @@ public abstract class Menu {
         this.menuItems.remove(index);
     }
 
-    public void open() {
+    public void createInventory() {
         int size = this.rows.getSize();
-        this.inventory = Bukkit.createInventory(new MenuHolder(Bukkit.createInventory(this.player, size, this.title), this), size, this.title);
+        this.inventory = Bukkit.createInventory(new MenuHolder(Bukkit.createInventory(null, size, this.title), this), size, this.title);
 
         this.updateItems();
+    }
 
-        this.player.openInventory(this.inventory);
+    public void open(Player player) {
+        if(this.inventory == null) {
+            this.createInventory();
+        }
+
+        player.openInventory(this.inventory);
     }
 
     public Optional<Inventory> getInventory() {
         return Optional.ofNullable(this.inventory);
     }
 
-    public void onClose() {
-    }
-
-    public static Optional<Menu> getFromInventory(Inventory inventory) {
-        if(!(inventory.getHolder() instanceof MenuHolder)) {
-            return Optional.empty();
-        }
-
-        return Optional.of(((MenuHolder) inventory.getHolder()).getMenu());
+    public void onClose(Player player) {
     }
 
 }
