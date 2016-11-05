@@ -1,8 +1,10 @@
 package org.devathon.contest2016.machine;
 
 import com.google.common.base.Preconditions;
+import org.bukkit.Location;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.devathon.contest2016.DevathonPlugin;
+import org.bukkit.inventory.Inventory;
 import org.devathon.contest2016.menu.Rows;
 import org.devathon.contest2016.menu.menu.Menu;
 import org.devathon.contest2016.menus.SimpleMachineMenu;
@@ -94,5 +96,13 @@ public class SimpleMachine implements Machine {
     @Override
     public void open(Player player) {
         this.menu.open(player);
+    }
+
+    @Override
+    public void onBreak(Location location) {
+        Inventory inventory = this.menu.getInventory().get();
+        location.getWorld().dropItemNaturally(location, inventory.getItem(SimpleMachineMenu.INPUT_SLOT));
+        location.getWorld().dropItemNaturally(location, inventory.getItem(SimpleMachineMenu.FUEL_SLOT));
+        location.getWorld().dropItemNaturally(location, inventory.getItem(SimpleMachineMenu.OUTPUT_SLOT));
     }
 }

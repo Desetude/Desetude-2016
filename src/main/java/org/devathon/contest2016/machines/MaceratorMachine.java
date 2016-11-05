@@ -6,10 +6,10 @@ import org.devathon.contest2016.machine.Process;
 import org.devathon.contest2016.machine.SimpleMachine;
 import org.devathon.contest2016.utils.ItemStackBuilder;
 
-public class CompressorMachine extends SimpleMachine {
+public class MaceratorMachine extends SimpleMachine {
 
-    public CompressorMachine() {
-        super("Compressor", ChatColor.GOLD + "Compressor");
+    public MaceratorMachine() {
+        super("Macerator", ChatColor.GOLD + "Macerator");
 
         this.addProcesses(
                 this.dustProcess(Material.IRON_ORE, 7, ChatColor.GRAY + "Iron dust", "iron", 450),

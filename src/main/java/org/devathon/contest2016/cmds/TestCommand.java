@@ -6,9 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.devathon.contest2016.machines.CompressorMachine;
-import org.devathon.contest2016.machines.SmelterMachine;
 import org.devathon.contest2016.utils.ItemStackBuilder;
 
 public class TestCommand implements CommandExecutor {
@@ -27,11 +24,11 @@ public class TestCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         switch (args[0].toLowerCase()) {
-            case "compressor":
+            case "macerator":
                 player.getInventory().addItem(new ItemStackBuilder()
                         .material(Material.FURNACE)
-                        .name(ChatColor.GOLD + "Compressor")
-                        .stringTag("machine", "compressor")
+                        .name(ChatColor.GOLD + "Macerator")
+                        .stringTag("machine", "macerator")
                         .build());
                 break;
             case "smelter":

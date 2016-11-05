@@ -31,6 +31,10 @@ public class Process {
         }, output, processingPower);
     }
 
+    public static Process create(Material material, Material output, long processingPower) {
+        return create(material, new ItemStack(output), processingPower);
+    }
+
     public int getAmountRequired(ItemStack itemStack) {
         return this.inputAmountRequired.apply(itemStack);
     }

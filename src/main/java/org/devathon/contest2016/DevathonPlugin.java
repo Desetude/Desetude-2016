@@ -3,7 +3,7 @@ package org.devathon.contest2016;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.devathon.contest2016.cmds.TestCommand;
 import org.devathon.contest2016.listeners.MachineListener;
-import org.devathon.contest2016.machines.CompressorMachine;
+import org.devathon.contest2016.machines.MaceratorMachine;
 import org.devathon.contest2016.machines.MachineFactory;
 import org.devathon.contest2016.machines.SmelterMachine;
 import org.devathon.contest2016.menu.MenuListener;
@@ -21,7 +21,7 @@ public class DevathonPlugin extends JavaPlugin {
 
         this.getCommand("test").setExecutor(new TestCommand());
 
-        MachineFactory.registerMachine("compressor", CompressorMachine::new);
+        MachineFactory.registerMachine("macerator", MaceratorMachine::new);
         MachineFactory.registerMachine("smelter", SmelterMachine::new);
     }
 

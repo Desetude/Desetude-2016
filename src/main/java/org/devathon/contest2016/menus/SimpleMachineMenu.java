@@ -1,5 +1,7 @@
 package org.devathon.contest2016.menus;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Range;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,17 +19,24 @@ import org.devathon.contest2016.menu.menu.Menu;
 import org.devathon.contest2016.utils.FuelUtils;
 import org.devathon.contest2016.utils.ItemStackBuilder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class SimpleMachineMenu extends Menu {
 
-    private static final int INPUT_SLOT = 11;
-    private static final int PERCENTAGE_SLOT = 13;
-    private static final int FUEL_STATUS_SLOT = 22;
-    private static final int OUTPUT_SLOT = 15;
-    private static final int FUEL_SLOT = 49;
+    public static final int INPUT_SLOT = 10;
+    public static final int OUTPUT_SLOT = 16;
+    public static final int FUEL_SLOT = 40;
+    private static final List<Integer> PROGRESS_SLOTS = Lists.newArrayList(12, 13, 14);
 
     private final SimpleMachine machine;
+
+    private String noProgressionReason;
 
     public SimpleMachineMenu(SimpleMachine machine, Rows rows, String title) {
         super(rows, title);
@@ -43,39 +52,98 @@ public class SimpleMachineMenu extends Menu {
     }
 
     public void addMenuItems() {
-        for (int i : new int[]{1, 2, 3, 10, 12, 19, 20, 21}) {
-            this.addMenuItem(i, MenuItem.create(new ItemStackBuilder().material(Material.STAINED_GLASS_PANE)
-                    .data(14)
-                    .name(ChatColor.YELLOW + "Input")
-                    .build()));
-        }
+        IntStream.concat(
+                IntStream.concat(IntStream.range(0, 9), IntStream.range(27, 36)),
+                IntStream.of(9, 11, 15, 17, 18, 20, 21, 22, 23, 24, 26, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53)
+        ).forEach(index -> this.addMenuItem(index, MenuItem.create(new ItemStackBuilder()
+                .material(Material.STAINED_GLASS_PANE)
+                .data(7)
+                .name(" ")
+                .build())));
 
-        for (int i : new int[]{5, 6, 7, 14, 16, 23, 24, 25}) {
-            this.addMenuItem(i, MenuItem.create(new ItemStackBuilder().material(Material.STAINED_GLASS_PANE)
-                    .data(5)
-                    .name(ChatColor.YELLOW + "Output")
-                    .build()));
-        }
-
-        for (int i : new int[]{39, 40, 41, 48, 50}) {
-            this.addMenuItem(i, MenuItem.create(new ItemStackBuilder().material(Material.STAINED_GLASS_PANE)
-                    .data(7)
-                    .name(ChatColor.YELLOW + "Fuel")
-                    .build()));
-        }
-
-        this.addMenuItem(PERCENTAGE_SLOT, MenuItem.create(() -> new ItemStackBuilder()
-                .material(Material.SIGN)
-                .name((this.machine.getCurrentProgressPercentage() > 50 ? ChatColor.YELLOW : ChatColor.RED) +
-                        Integer.toString(this.machine.getCurrentProgressPercentage()) + "%")
+        this.addMenuItem(12, MenuItem.create(() -> new ItemStackBuilder()
+                .material(Material.STAINED_GLASS)
+                .name(this.getName(0))
+                .lore(getProgressLore())
+                .data(this.getProgressData(0))
                 .build()));
 
-        this.addMenuItem(FUEL_STATUS_SLOT, MenuItem.create(() ->
-                new ItemStackBuilder()
-                        .material(Material.STAINED_GLASS)
-                        .data(this.machine.getFuelLevel() > 0 ? 5 : 14)
-                        .name(ChatColor.GOLD + "Fuel status")
-                        .build()));
+        this.addMenuItem(13, MenuItem.create(() -> new ItemStackBuilder()
+                .material(Material.STAINED_GLASS)
+                .name(this.getName(11))
+                .lore(getProgressLore())
+                .data(this.getProgressData(11))
+                .build()));
+
+        this.addMenuItem(14, MenuItem.create(() -> new ItemStackBuilder()
+                .material(Material.STAINED_GLASS)
+                .name(this.getName(22))
+                .lore(getProgressLore())
+                .data(this.getProgressData(22))
+                .build()));
+
+        this.addMenuItem(19, MenuItem.create(new ItemStackBuilder()
+                .material(Material.SIGN)
+                .name(ChatColor.GREEN + "Input")
+                .build()));
+
+        this.addMenuItem(25, MenuItem.create(new ItemStackBuilder()
+                .material(Material.SIGN)
+                .name(ChatColor.YELLOW + "Output")
+                .build()));
+
+        this.addMenuItem(19, MenuItem.create(new ItemStackBuilder()
+                .material(Material.SIGN)
+                .name(ChatColor.GREEN + "Input")
+                .build()));
+
+        this.addMenuItem(49, MenuItem.create(new ItemStackBuilder()
+                .material(Material.SIGN)
+                .name(ChatColor.GRAY + "Fuel")
+                .build()));
+    }
+
+    private List<String> getProgressLore() {
+        return this.noProgressionReason != null ? Collections.singletonList(this.noProgressionReason) : new ArrayList<>();
+    }
+
+    private String getName(int offset) {
+        int data = this.getProgressData(offset);
+
+        ChatColor color;
+
+        switch (data) {
+            case 5:
+                color = ChatColor.GREEN;
+                break;
+            case 4:
+                color = ChatColor.YELLOW;
+                break;
+            case 1:
+                color = ChatColor.GOLD;
+                break;
+            default:
+                color = ChatColor.RED;
+                break;
+        }
+
+        return color.toString() + this.machine.getCurrentProgressPercentage() + "%";
+    }
+
+    private int getProgressData(int offset) {
+        int data = 14;
+
+        int percentageProgress = this.machine.getCurrentProgressPercentage();
+
+        if(percentageProgress > 77 + offset) {
+            data = 5;
+        } else if(percentageProgress > 44 + offset) {
+            data = 4;
+        } else if(percentageProgress > 11 + offset) {
+            data = 1;
+        }
+
+        return data;
     }
 
     @Override public void onItemClick(MenuItemClickEvent event) {
@@ -91,6 +159,11 @@ public class SimpleMachineMenu extends Menu {
 
         @Override
         public void run() {
+            this.process();
+            PROGRESS_SLOTS.forEach(SimpleMachineMenu.this::updateItem);
+        }
+
+        private void process() {
             SimpleMachineMenu menu = SimpleMachineMenu.this;
             Machine machine = menu.machine;
             Inventory inventory = menu.inventory;
@@ -98,7 +171,7 @@ public class SimpleMachineMenu extends Menu {
             ItemStack input = inventory.getItem(INPUT_SLOT);
             if (input == null) {
                 machine.resetProcess();
-                menu.updateItem(PERCENTAGE_SLOT);
+                menu.noProgressionReason = ChatColor.YELLOW + "No input item.";
                 return;
             }
 
@@ -106,6 +179,7 @@ public class SimpleMachineMenu extends Menu {
             if (!optProcess.isPresent()) {
                 optProcess = machine.getProcesses().stream().filter(process -> process.getAmountRequired(input) >= 1).findAny();
                 if (!optProcess.isPresent()) {
+                    menu.noProgressionReason = ChatColor.RED + "Invalid input.";
                     return;
                 }
 
@@ -118,37 +192,48 @@ public class SimpleMachineMenu extends Menu {
             int amountRequired = process.getAmountRequired(input);
             if (amountRequired < 1 || amountRequired > input.getAmount()) {
                 machine.resetProcess();
-                menu.updateItem(PERCENTAGE_SLOT);
+
+                menu.noProgressionReason = ChatColor.YELLOW + "Not enough of the input item.";
                 return;
             }
 
             ItemStack output = inventory.getItem(OUTPUT_SLOT);
             if (output != null && !output.isSimilar(process.getOutput())) {
+                menu.noProgressionReason = ChatColor.RED + "Disparate output item.";
                 return;
             }
 
             if (machine.getFuelLevel() <= 0) {
                 ItemStack fuel = inventory.getItem(FUEL_SLOT);
-                if (!FuelUtils.isFuel(fuel)) {
-                    menu.updateItem(FUEL_STATUS_SLOT);
+                if(fuel == null) {
+                    menu.noProgressionReason = ChatColor.RED + "No fuel left.";
                     return;
                 }
 
-                int fuelAmount = fuel.getAmount() - 1;
-                if (fuelAmount <= 0) {
-                    inventory.remove(fuel);
+                if (!FuelUtils.isFuel(fuel)) {
+                    return;
+                }
+
+                if(fuel.getType() == Material.LAVA_BUCKET) {
+                    inventory.setItem(FUEL_SLOT, new ItemStack(Material.BUCKET));
                 } else {
-                    fuel.setAmount(fuelAmount);
+                    int fuelAmount = fuel.getAmount() - 1;
+                    if (fuelAmount <= 0) {
+                        inventory.remove(fuel);
+                    } else {
+                        fuel.setAmount(fuelAmount);
+                    }
                 }
 
                 machine.addFuel(FuelUtils.getFuelTime(fuel));
             }
 
-            machine.incrementProgress();
-            machine.decrementFuel();
+            if(machine.getCurrentProgress() < process.getProcessingPower()) {
+                menu.noProgressionReason = null;
 
-            menu.updateItem(FUEL_STATUS_SLOT);
-            menu.updateItem(PERCENTAGE_SLOT);
+                machine.incrementProgress();
+                machine.decrementFuel();
+            }
 
             if (machine.getCurrentProgress() < process.getProcessingPower()) {
                 return;
@@ -157,6 +242,7 @@ public class SimpleMachineMenu extends Menu {
             if (output != null) {
                 int outputAmount = output.getAmount() + process.getOutput().getAmount();
                 if (outputAmount > output.getMaxStackSize()) {
+                    menu.noProgressionReason = ChatColor.RED + "No more output room.";
                     return;
                 }
 
@@ -175,8 +261,8 @@ public class SimpleMachineMenu extends Menu {
             }
 
             machine.resetProcess();
-            menu.updateItem(PERCENTAGE_SLOT);
         }
+
     }
 
 }

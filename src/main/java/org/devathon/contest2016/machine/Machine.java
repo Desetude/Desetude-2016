@@ -1,9 +1,7 @@
 package org.devathon.contest2016.machine;
 
-import org.bukkit.Material;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.devathon.contest2016.utils.ItemStackBuilder;
 
 import java.util.Optional;
 import java.util.Set;
@@ -41,5 +39,7 @@ public interface Machine {
     void decrementFuel();
 
     void open(Player player);
+
+    void onBreak(Location location);
 
 }

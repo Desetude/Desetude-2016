@@ -90,7 +90,7 @@ public abstract class Menu {
     }
 
     public void open(Player player) {
-        if(this.inventory == null) {
+        if (this.inventory == null) {
             this.createInventory();
         }
 
