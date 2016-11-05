@@ -1,4 +1,4 @@
-package org.devathon.contest2016;
+package org.devathon.contest2016.machine;
 
 import org.bukkit.entity.Player;
 

@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
 import org.devathon.contest2016.menu.menu.Menu;
 
 public class MenuItemClickEvent extends Event {
@@ -15,7 +16,7 @@ public class MenuItemClickEvent extends Event {
     private final int index;
     private final ClickType clickType;
 
-    public MenuItemClickEvent(Player player, Menu menu, int index, ClickType clickType) {
+    public MenuItemClickEvent(Player player, Menu menu, int index, ClickType clickType, ItemStack currentItem) {
         this.player = player;
         this.menu = menu;
         this.index = index;
