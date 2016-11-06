@@ -48,7 +48,6 @@ public class MachineListener implements Listener {
         if (optMachine.isPresent()) {
             event.setCancelled(true);
             optMachine.get().open(event.getPlayer());
-        } else {
         }
     }
 
