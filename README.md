@@ -32,7 +32,7 @@ Iron Block | Dispenser | Iron Block
 ![Recipe](https://i.imgur.com/4nidcKe.png)
 
 Cobblestone | Furnace | Cobblestone<br>
-Cobblestone | Piston    | Cobblestone<br>
+Cobblestone | &nbsp;&nbsp;Piston&nbsp;&nbsp; | Cobblestone<br>
 Cobblestone | Furnace | Cobblestone
 
 #### Advanced Smelter
@@ -47,9 +47,9 @@ Iron Block | Furnace | Iron Block
 
 ![Recipe](https://i.imgur.com/kZFAzRE.png)
 
-Stone | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Stone<br>
+Stone | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Stone<br>
 Stone | Iron Block | Stone<br>
-Stone | &nbsp;&nbsp;&nbsp;&nbsp;Piston&nbsp;&nbsp;&nbsp;&nbsp; | Stone
+Stone | &nbsp;&nbsp;&nbsp;Piston&nbsp;&nbsp;&nbsp; | Stone
 
 ----------
 
