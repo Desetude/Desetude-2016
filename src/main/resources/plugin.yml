@@ -1,10 +1,6 @@
 name: Devathon Project
 description: A project for the Devathon contest
 version: 1.0.0
-author: Your Name Here
+author: Desetude
 
 main: org.devathon.contest2016.DevathonPlugin
-
-commands:
-  test:
-    description: Test command

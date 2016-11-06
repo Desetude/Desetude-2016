@@ -129,13 +129,13 @@ API
 
 To create a machine you must implement Machine, or you can just simply extend SimpleMachine for a simple implementation. e.g:
 
-   ```java
+```java
    public class CompressorMachine extends SimpleMachine {
 	    public CompressorMachine(Location location) {
 	        super("Compressor", ChatColor.GREEN + "Compressor", 1, location); //Title, formatted name, fuelMultiplier, location
 	    }
     }
-    ```
+```
 
  To add a recipes/processes to your machine you must first create a Process using any of the `Process.create` methoods and then in your machine add the recipes with SimpleMachine#addProcesses(Process...).
 
