@@ -15,40 +15,40 @@ Machine recipes
 
 ![Recipe](https://i.imgur.com/s5rC6uw.png)
 
-Cobblestone | Dispenser | Cobblestone
-Cobblestone | &nbsp;&nbsp;&nbsp;&nbsp;Piston&nbsp;&nbsp;&nbsp;&nbsp; | Cobblestone
+Cobblestone | Dispenser | Cobblestone<br>
+Cobblestone | &nbsp;&nbsp;&nbsp;&nbsp;Piston&nbsp;&nbsp;&nbsp;&nbsp; | Cobblestone<br>
 Cobblestone | Dispenser | Cobblestone
 
 #### Advanced Macerator
 
 ![Recipe](https://i.imgur.com/UqY0b0k.png)
 
-Iron Block | Dispenser | Iron Block
-Iron Block |&nbsp;&nbsp;&nbsp; Piston &nbsp;&nbsp;&nbsp;&nbsp;| Iron Block
+Iron Block | Dispenser | Iron Block<br>
+Iron Block |&nbsp;&nbsp;&nbsp; Piston &nbsp;&nbsp;&nbsp;&nbsp;| Iron Block<br>
 Iron Block | Dispenser | Iron Block
 
 #### Basic Smelter
 
 ![Recipe](https://i.imgur.com/4nidcKe.png)
 
-Cobblestone | Furnace | Cobblestone
-Cobblestone | Piston    | Cobblestone
+Cobblestone | Furnace | Cobblestone<br>
+Cobblestone | Piston    | Cobblestone<br>
 Cobblestone | Furnace | Cobblestone
 
 #### Advanced Smelter
 
 ![Recipe](https://i.imgur.com/hbWgTZ5.png)
 
-Iron Block | Furnace | Iron Block
-Iron Block | &nbsp;&nbsp;Piston&nbsp;&nbsp; | Iron Block
+Iron Block | Furnace | Iron Block<br>
+Iron Block | &nbsp;&nbsp;Piston&nbsp;&nbsp; | Iron Block<br>
 Iron Block | Furnace | Iron Block
 
 #### Compressor
 
 ![Recipe](https://i.imgur.com/kZFAzRE.png)
 
-Stone | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Stone
-Stone | Iron Block | Stone
+Stone | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Stone<br>
+Stone | Iron Block | Stone<br>
 Stone | &nbsp;&nbsp;&nbsp;&nbsp;Piston&nbsp;&nbsp;&nbsp;&nbsp; | Stone
 
 ----------
