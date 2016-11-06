@@ -16,7 +16,7 @@ Machine recipes
 ![Recipe](https://i.imgur.com/s5rC6uw.png)
 
 Cobblestone | Dispenser | Cobblestone<br>
-Cobblestone | &nbsp;&nbsp;&nbsp;&nbsp;Piston&nbsp;&nbsp;&nbsp;&nbsp; | Cobblestone<br>
+Cobblestone | &nbsp;&nbsp;&nbsp;Piston&nbsp;&nbsp;&nbsp; | Cobblestone<br>
 Cobblestone | Dispenser | Cobblestone
 
 #### Advanced Macerator
@@ -24,7 +24,7 @@ Cobblestone | Dispenser | Cobblestone
 ![Recipe](https://i.imgur.com/UqY0b0k.png)
 
 Iron Block | Dispenser | Iron Block<br>
-Iron Block |&nbsp;&nbsp;&nbsp; Piston &nbsp;&nbsp;&nbsp;&nbsp;| Iron Block<br>
+Iron Block |&nbsp;&nbsp;&nbsp; Piston &nbsp;&nbsp;&nbsp;| Iron Block<br>
 Iron Block | Dispenser | Iron Block
 
 #### Basic Smelter
