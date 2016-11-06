@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.devathon.contest2016.cmds.TestCommand;
 import org.devathon.contest2016.listeners.MachineListener;
 import org.devathon.contest2016.machines.CompressorMachine;
 import org.devathon.contest2016.machines.MaceratorMachine;
@@ -23,8 +22,6 @@ public class DevathonPlugin extends JavaPlugin {
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(new MenuListener(), this);
         this.getServer().getPluginManager().registerEvents(new MachineListener(), this);
-
-        this.getCommand("test").setExecutor(new TestCommand());
 
         MachineFactory.registerMachine("macerator", location -> new MaceratorMachine(location, false));
         MachineFactory.registerMachine("advanced_macerator", location -> new MaceratorMachine(location, true));
