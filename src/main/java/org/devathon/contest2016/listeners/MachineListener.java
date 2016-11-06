@@ -17,7 +17,7 @@ public class MachineListener implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onBlockPlace(BlockPlaceEvent event) {
-        Optional<Machine> optMachine = MachineFactory.createMachine(event.getItemInHand());
+        Optional<Machine> optMachine = MachineFactory.createMachine(event.getItemInHand(), event.getBlockPlaced().getLocation());
         if (!optMachine.isPresent()) {
             return;
         }

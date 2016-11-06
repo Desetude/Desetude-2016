@@ -21,14 +21,36 @@ public class Process {
         return new Process(inputAmountRequired, output, processingPower);
     }
 
-    public static Process create(Material material, ItemStack output, long processingPower) {
+    public static Process create(Material material, int inputData, int inputAmount, ItemStack output, long processingPower) {
         return create(item -> {
-            if (item.getType().equals(material)) {
-                return 1;
+            if (item.getType().equals(material) && item.getDurability() == inputData) {
+                return inputAmount;
             }
 
             return -1;
         }, output, processingPower);
+    }
+
+    public static Process create(Material material, int inputData, int inputAmount, Material output, long processingPower) {
+        return create(material, inputAmount, new ItemStack(output), processingPower);
+    }
+
+    public static Process create(Material material, int inputAmount, ItemStack output, long processingPower) {
+        return create(item -> {
+            if (item.getType().equals(material)) {
+                return inputAmount;
+            }
+
+            return -1;
+        }, output, processingPower);
+    }
+
+    public static Process create(Material material, int inputAmount, Material output, long processingPower) {
+        return create(material, inputAmount, new ItemStack(output), processingPower);
+    }
+
+    public static Process create(Material material, ItemStack output, long processingPower) {
+        return create(material, 1, output, processingPower);
     }
 
     public static Process create(Material material, Material output, long processingPower) {

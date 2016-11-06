@@ -2,12 +2,15 @@ package org.devathon.contest2016.machine;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.devathon.contest2016.menu.Rows;
 import org.devathon.contest2016.menu.menu.Menu;
 import org.devathon.contest2016.menus.SimpleMachineMenu;
+import org.devathon.contest2016.utils.Hologram;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,19 +21,27 @@ public class SimpleMachine implements Machine {
 
     private final String title;
     private final String formattedName;
+    private final int fuelMultiplier;
     private final Set<Process> processes;
     private Process currentProcess;
     private long currentProgress;
     private long fuelLevel;
 
-    private Menu menu;
+    private final Menu menu;
+    private final Hologram hologram;
 
-    public SimpleMachine(String title, String formattedName) {
+    public SimpleMachine(String title, String formattedName, int fuelMultiplier, Location location) {
         this.title = title;
         this.formattedName = formattedName;
+        this.fuelMultiplier = fuelMultiplier;
 
         this.processes = new HashSet<>();
-        this.menu = new SimpleMachineMenu(this, Rows.SIX, this.title);
+        this.menu = new SimpleMachineMenu(this, Rows.SIX, this.title, this.fuelMultiplier);
+        this.hologram = new Hologram(location.add(0.5, -0.6, 0.5), this.getFormattedName());
+    }
+
+    public SimpleMachine(String title, String formattedName, Location location) {
+        this(title, formattedName, 1, location);
     }
 
     protected void addProcesses(Process... process) {
@@ -79,18 +90,18 @@ public class SimpleMachine implements Machine {
     }
 
     @Override
-    public long getFuelLevel() {
+    public double getFuelLevel() {
         return this.fuelLevel;
     }
 
     @Override
-    public void addFuel(long amount) {
+    public void addFuel(double amount) {
         this.fuelLevel += amount;
     }
 
     @Override
-    public void decrementFuel() {
-        this.fuelLevel--;
+    public void decrementFuel(double amount) {
+        this.fuelLevel-=amount;
     }
 
     @Override
@@ -101,8 +112,23 @@ public class SimpleMachine implements Machine {
     @Override
     public void onBreak(Location location) {
         Inventory inventory = this.menu.getInventory().get();
-        location.getWorld().dropItemNaturally(location, inventory.getItem(SimpleMachineMenu.INPUT_SLOT));
-        location.getWorld().dropItemNaturally(location, inventory.getItem(SimpleMachineMenu.FUEL_SLOT));
-        location.getWorld().dropItemNaturally(location, inventory.getItem(SimpleMachineMenu.OUTPUT_SLOT));
+        ItemStack input = inventory.getItem(SimpleMachineMenu.INPUT_SLOT);
+        ItemStack output = inventory.getItem(SimpleMachineMenu.OUTPUT_SLOT);
+        ItemStack fuel = inventory.getItem(SimpleMachineMenu.FUEL_SLOT);
+
+        if(input != null && input.getType() != Material.AIR) {
+            location.getWorld().dropItemNaturally(location, input);
+        }
+
+        if(fuel != null && fuel.getType() != Material.AIR) {
+            location.getWorld().dropItemNaturally(location, fuel);
+        }
+
+        if(output != null && output.getType() != Material.AIR) {
+            location.getWorld().dropItemNaturally(location, output);
+        }
+
+        this.hologram.remove();
     }
+
 }

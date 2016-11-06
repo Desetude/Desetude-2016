@@ -32,11 +32,11 @@ public interface Machine {
 
     void resetProcess();
 
-    long getFuelLevel();
+    double getFuelLevel();
 
-    void addFuel(long amount);
+    void addFuel(double amount);
 
-    void decrementFuel();
+    void decrementFuel(double amount);
 
     void open(Player player);
 

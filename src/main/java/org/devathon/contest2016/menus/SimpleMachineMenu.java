@@ -35,10 +35,11 @@ public class SimpleMachineMenu extends Menu {
     private static final List<Integer> PROGRESS_SLOTS = Lists.newArrayList(12, 13, 14);
 
     private final SimpleMachine machine;
+    private final int fuelMultiplier;
 
     private String noProgressionReason;
 
-    public SimpleMachineMenu(SimpleMachine machine, Rows rows, String title) {
+    public SimpleMachineMenu(SimpleMachine machine, Rows rows, String title, int fuelMultiplier) {
         super(rows, title);
 
         this.machine = machine;
@@ -49,6 +50,7 @@ public class SimpleMachineMenu extends Menu {
 
         this.createInventory();
         new UpdateRunnable().runTaskTimer(DevathonPlugin.get(), 1L, 1L);
+        this.fuelMultiplier = fuelMultiplier;
     }
 
     public void addMenuItems() {
@@ -203,7 +205,7 @@ public class SimpleMachineMenu extends Menu {
                 return;
             }
 
-            if (machine.getFuelLevel() <= 0) {
+            if (machine.getFuelLevel() < menu.fuelMultiplier) {
                 ItemStack fuel = inventory.getItem(FUEL_SLOT);
                 if(fuel == null) {
                     menu.noProgressionReason = ChatColor.RED + "No fuel left.";
@@ -232,7 +234,7 @@ public class SimpleMachineMenu extends Menu {
                 menu.noProgressionReason = null;
 
                 machine.incrementProgress();
-                machine.decrementFuel();
+                machine.decrementFuel(menu.fuelMultiplier);
             }
 
             if (machine.getCurrentProgress() < process.getProcessingPower()) {
