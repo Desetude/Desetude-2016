@@ -3,7 +3,6 @@ package org.devathon.contest2016.machine;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -23,12 +22,11 @@ public class SimpleMachine implements Machine {
     private final String formattedName;
     private final int fuelMultiplier;
     private final Set<Process> processes;
+    private final Menu menu;
+    private final Hologram hologram;
     private Process currentProcess;
     private long currentProgress;
     private long fuelLevel;
-
-    private final Menu menu;
-    private final Hologram hologram;
 
     public SimpleMachine(String title, String formattedName, int fuelMultiplier, Location location) {
         this.title = title;
@@ -101,7 +99,7 @@ public class SimpleMachine implements Machine {
 
     @Override
     public void decrementFuel(double amount) {
-        this.fuelLevel-=amount;
+        this.fuelLevel -= amount;
     }
 
     @Override
@@ -116,15 +114,15 @@ public class SimpleMachine implements Machine {
         ItemStack output = inventory.getItem(SimpleMachineMenu.OUTPUT_SLOT);
         ItemStack fuel = inventory.getItem(SimpleMachineMenu.FUEL_SLOT);
 
-        if(input != null && input.getType() != Material.AIR) {
+        if (input != null && input.getType() != Material.AIR) {
             location.getWorld().dropItemNaturally(location, input);
         }
 
-        if(fuel != null && fuel.getType() != Material.AIR) {
+        if (fuel != null && fuel.getType() != Material.AIR) {
             location.getWorld().dropItemNaturally(location, fuel);
         }
 
-        if(output != null && output.getType() != Material.AIR) {
+        if (output != null && output.getType() != Material.AIR) {
             location.getWorld().dropItemNaturally(location, output);
         }
 

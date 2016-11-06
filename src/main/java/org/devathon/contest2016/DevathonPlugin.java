@@ -28,8 +28,8 @@ public class DevathonPlugin extends JavaPlugin {
 
         MachineFactory.registerMachine("macerator", location -> new MaceratorMachine(location, false));
         MachineFactory.registerMachine("advanced_macerator", location -> new MaceratorMachine(location, true));
-        MachineFactory.registerMachine("smelter",  location -> new SmelterMachine(location, false));
-        MachineFactory.registerMachine("advanced_smelter",  location -> new SmelterMachine(location, true));
+        MachineFactory.registerMachine("smelter", location -> new SmelterMachine(location, false));
+        MachineFactory.registerMachine("advanced_smelter", location -> new SmelterMachine(location, true));
         MachineFactory.registerMachine("compressor", CompressorMachine::new);
 
         this.addRecipes();
@@ -39,7 +39,7 @@ public class DevathonPlugin extends JavaPlugin {
         this.getServer().addRecipe(new ShapedRecipe(
                 new ItemStackBuilder()
                         .material(Material.FURNACE)
-                        .name(ChatColor.GOLD + "Smelter")
+                        .name(ChatColor.YELLOW + "Basic Smelter")
                         .stringTag("machine", "smelter")
                         .build())
                 .shape("cfc", "cpc", "cfc")
@@ -50,8 +50,8 @@ public class DevathonPlugin extends JavaPlugin {
         this.getServer().addRecipe(new ShapedRecipe(
                 new ItemStackBuilder()
                         .material(Material.FURNACE)
-                        .name(ChatColor.GOLD + "Smelter")
-                        .stringTag("machine", "smelter")
+                        .name(ChatColor.GOLD + "Advanced Smelter")
+                        .stringTag("machine", "advanced_smelter")
                         .build())
                 .shape("ifi", "ipi", "ifi")
                 .setIngredient('i', Material.IRON_BLOCK)
@@ -61,7 +61,7 @@ public class DevathonPlugin extends JavaPlugin {
         this.getServer().addRecipe(new ShapedRecipe(
                 new ItemStackBuilder()
                         .material(Material.FURNACE)
-                        .name(ChatColor.GOLD + "Macerator")
+                        .name(ChatColor.LIGHT_PURPLE + "Basic Macerator")
                         .stringTag("machine", "macerator")
                         .build())
                 .shape("cdc", "cpc", "cdc")
@@ -72,12 +72,23 @@ public class DevathonPlugin extends JavaPlugin {
         this.getServer().addRecipe(new ShapedRecipe(
                 new ItemStackBuilder()
                         .material(Material.FURNACE)
-                        .name(ChatColor.GOLD + "Advanced Macerator")
+                        .name(ChatColor.RED + "Advanced Macerator")
                         .stringTag("machine", "advanced_macerator")
                         .build())
                 .shape("idi", "ipi", "idi")
                 .setIngredient('i', Material.IRON_BLOCK)
                 .setIngredient('d', Material.DISPENSER)
+                .setIngredient('p', Material.PISTON_BASE));
+
+        this.getServer().addRecipe(new ShapedRecipe(
+                new ItemStackBuilder()
+                        .material(Material.FURNACE)
+                        .name(ChatColor.GREEN + "Compressor")
+                        .stringTag("machine", "compressor")
+                        .build())
+                .shape("s s", "sis", "sps")
+                .setIngredient('s', Material.STONE)
+                .setIngredient('i', Material.IRON_BLOCK)
                 .setIngredient('p', Material.PISTON_BASE));
     }
 

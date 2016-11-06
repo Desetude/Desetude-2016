@@ -1,73 +1,124 @@
-# Devathon Project
-This is the base layout for your Devathon Project. It includes several scripts to make running incredibly easy on Windows, Mac, and Linux.
-
-## Help
-
-Help will be available for 25 hours during the contest at the following sources:
-
-Twitter: https://twitter.com/JoinDevathon
-Discord: https://discordapp.com/invite/qNxMS5B
-
-## Theme
-
-The theme for the 2016 Devathon Contest is: **Machines!**
-Make a machine, make an interaction with a machine, or do something completely creative! As long as it has something to do with machines, you're good to go.
-
-## Reminders
-
-Finish by November 6th at 8AM Central Time. You can find this time in your local timezone here: https://encrypted.google.com/search?hl=en&q=8%20am%20central%20time
-
-## Rules
+Machines
+========
 
 
-1.  Teaming is not allowed.
-2.  No usage of public code & libraries.
-3.  Streaming is allowed.
-4.  Purposely copying another person’s idea is not allowed.
-5.  You are not allowed to use code written before the contest has started.
-6.  Code will be pushed regularly.
-7.  Binaries should not be pushed.
-8.  Accepting pull requests is not allowed.
-9.  Code must be able to compile, we will not fix compile errors.
-10. You must use Java 8.
-11. Your plugin must fit the theme or it will be disqualified.
-12. Maven is required.
+This plugin has a group of different machines that can be used to process different items.
+
+----------
 
 
-## Get Started
+Machine recipes
+-------------
 
-**If you already know how to use Maven, then more than likely the following steps are irrelevant for you. Just do your usual thing.**
 
----
+#### Basic Macerator
 
-Don't worry, we made a video! Check it out at https://www.youtube.com/watch?v=u5HXS0l-VwQ
+![Recipe](https://i.imgur.com/s5rC6uw.png)
 
----
+Cobblestone | Dispenser | Cobblestone
+Cobblestone | &nbsp;&nbsp;&nbsp;&nbsp;Piston&nbsp;&nbsp;&nbsp;&nbsp; | Cobblestone
+Cobblestone | Dispenser | Cobblestone
 
-First things first, you need to have the Java JDK8 installed. You can find the appropriate version here: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+#### Advanced Macerator
 
-Then you need to have git installed. You can find the appropriate version for your OS here: https://git-scm.com/
+![Recipe](https://i.imgur.com/UqY0b0k.png)
 
-There are no other required dependencies, however Maven is optional if you want to set up your own development environment outside of what we do for you.
+Iron Block | Dispenser | Iron Block
+Iron Block |&nbsp;&nbsp;&nbsp; Piston &nbsp;&nbsp;&nbsp;&nbsp;| Iron Block
+Iron Block | Dispenser | Iron Block
 
-## Running
+#### Basic Smelter
 
-If you're on Windows, you'll want to run all of these commands inside Git Bash, which is a program installed when you installed Git. You can paste by right clicking inside of the window.
+![Recipe](https://i.imgur.com/4nidcKe.png)
 
-If you don't have this Git repository cloned yet, click on clone or download. If you have an SSH key on your account, use the SSH link. Otherwise use the HTTPS link if you want to use your GitHub username and password.
+Cobblestone | Furnace | Cobblestone
+Cobblestone | Piston    | Cobblestone
+Cobblestone | Furnace | Cobblestone
 
-Then run
+#### Advanced Smelter
 
-```bash
-git clone <link>
-```
+![Recipe](https://i.imgur.com/hbWgTZ5.png)
 
-To run your server, do:
+Iron Block | Furnace | Iron Block
+Iron Block | &nbsp;&nbsp;Piston&nbsp;&nbsp; | Iron Block
+Iron Block | Furnace | Iron Block
 
-```bash
-./run-server.sh
-```
+#### Compressor
 
-On first run this will download and compile the Spigot version that you're using for the contest. Because you're using this exact version of Spigot for the entire contest, you can safely use CraftBukkit and Minecraft Server code.
+![Recipe](https://i.imgur.com/kZFAzRE.png)
 
-This wrapper around the Spigot server has a few extra features that are not included inside of regular Spigot. If you type `stop` to stop the Minecraft Server, it'll automatically recompile your code and restart the server. To fully stop the server, type `exit` to safely stop the server and exit the recompilation loop. If you're on Windows, you won't have a `exit` command and will instead be asked every loop if you want to recompile.
+Stone | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Stone
+Stone | Iron Block | Stone
+Stone | &nbsp;&nbsp;&nbsp;&nbsp;Piston&nbsp;&nbsp;&nbsp;&nbsp; | Stone
+
+----------
+
+
+Processes
+========
+
+###Macerator
+
+Input     | Output
+--------- | ------
+Iron ore | 2 Iron dust
+Gold ore | 2 Gold dust
+Emerald ore | 2 Emerald dust
+Diamond ore | 2 Diamond dust
+Lapis ore | 8 Lapis Lazuli
+
+###Smelter
+
+Input     | Output
+--------- | ------
+Iron dust | Iron ingot
+Gold dust | Gold ingot
+Emerald dust | Emerald
+Diamond dust | Diamond
+
+Plus every vanilla smelting recipe.
+
+###Compressor
+
+Input     | Output
+--------- | ------
+4 Clay ball | Clay block
+4 Clay brick | Brick block
+Clay block | Hardened clay
+9 Melon | Melon block
+4 Glowstone dust | Glowstone
+4 Snow balls | Snow block
+4 Netherrack | Nether brick
+Snow block | Ice
+Ice | Packed Ice
+Sand | Sandstone
+9 Coal | Coal block
+9 Iron ingots | Iron block
+9 Diamonds | Diamond block
+9 Redstone | Redstone block
+9 Lapis Lazuli | Lapis lazuli block
+9 Emeralds | Emerald block
+
+How to use
+-------------
+
+ 1. Craft the machine.
+ ![Crafting](https://i.imgur.com/G5sYn4P.png)
+ 
+ 2. Place the machine.
+![Placing](https://i.imgur.com/Wuz0H3w.png)
+
+ 3. Right click the machine.
+![Opening](https://i.imgur.com/a1YzVl5.png)
+
+ 4. Put your input into the top left slot.
+![Input](https://i.imgur.com/aQfD1sj.png)
+
+ 5. Put your fuel in the bottom slot (works with any vanilla fuel, even lava).
+![Fuel](https://i.imgur.com/GdvfhQT.png)
+
+ 6. Progress will show on the top middle bar, if it is not progressing, simply hover over the bar to see why it is not doing so.
+![Progress](https://i.imgur.com/fUsmRt7.png)
+
+ 7. If there are no issues, you should start recieving output in the top right slot.
+ ![Output](https://i.imgur.com/qnKl096.png)

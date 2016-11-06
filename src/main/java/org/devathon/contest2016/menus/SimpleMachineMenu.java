@@ -1,7 +1,6 @@
 package org.devathon.contest2016.menus;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Range;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -20,12 +19,10 @@ import org.devathon.contest2016.utils.FuelUtils;
 import org.devathon.contest2016.utils.ItemStackBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class SimpleMachineMenu extends Menu {
 
@@ -137,11 +134,11 @@ public class SimpleMachineMenu extends Menu {
 
         int percentageProgress = this.machine.getCurrentProgressPercentage();
 
-        if(percentageProgress > 77 + offset) {
+        if (percentageProgress > 77 + offset) {
             data = 5;
-        } else if(percentageProgress > 44 + offset) {
+        } else if (percentageProgress > 44 + offset) {
             data = 4;
-        } else if(percentageProgress > 11 + offset) {
+        } else if (percentageProgress > 11 + offset) {
             data = 1;
         }
 
@@ -207,7 +204,7 @@ public class SimpleMachineMenu extends Menu {
 
             if (machine.getFuelLevel() < menu.fuelMultiplier) {
                 ItemStack fuel = inventory.getItem(FUEL_SLOT);
-                if(fuel == null) {
+                if (fuel == null) {
                     menu.noProgressionReason = ChatColor.RED + "No fuel left.";
                     return;
                 }
@@ -216,7 +213,7 @@ public class SimpleMachineMenu extends Menu {
                     return;
                 }
 
-                if(fuel.getType() == Material.LAVA_BUCKET) {
+                if (fuel.getType() == Material.LAVA_BUCKET) {
                     inventory.setItem(FUEL_SLOT, new ItemStack(Material.BUCKET));
                 } else {
                     int fuelAmount = fuel.getAmount() - 1;
@@ -230,7 +227,7 @@ public class SimpleMachineMenu extends Menu {
                 machine.addFuel(FuelUtils.getFuelTime(fuel));
             }
 
-            if(machine.getCurrentProgress() < process.getProcessingPower()) {
+            if (machine.getCurrentProgress() < process.getProcessingPower()) {
                 menu.noProgressionReason = null;
 
                 machine.incrementProgress();

@@ -9,11 +9,11 @@ import org.devathon.contest2016.machine.SimpleMachine;
 public class CompressorMachine extends SimpleMachine {
 
     public CompressorMachine(Location location) {
-        super("Compressor", ChatColor.GOLD + "Compressor", 1, location);
+        super("Compressor", ChatColor.GREEN + "Compressor", 1, location);
 
         this.addProcesses(Process.create(Material.CLAY_BALL, 4, Material.CLAY, 50));
         this.addProcesses(Process.create(Material.CLAY_BRICK, 4, Material.BRICK, 50));
-        this.addProcesses(Process.create(Material.CLAY, 4, Material.HARD_CLAY, 150));
+        this.addProcesses(Process.create(Material.CLAY, 1, Material.HARD_CLAY, 150));
 
         this.addProcesses(Process.create(Material.MELON, 9, Material.MELON_BLOCK, 150));
 

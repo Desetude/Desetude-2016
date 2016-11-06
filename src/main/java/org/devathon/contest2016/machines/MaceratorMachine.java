@@ -10,11 +10,11 @@ import org.devathon.contest2016.utils.ItemStackBuilder;
 public class MaceratorMachine extends SimpleMachine {
 
     public MaceratorMachine(Location location, boolean advanced) {
-        super((advanced ? "Advanced" : "Basic") + " Macerator", ChatColor.GOLD + (advanced ? "Advanced" : "Basic") + " Macerator",
+        super((advanced ? "Advanced" : "Basic") + " Macerator",
+                (advanced ? ChatColor.RED + "Advanced" : ChatColor.LIGHT_PURPLE + "Basic") + " Macerator",
                 advanced ? 3 : 1, location);
 
         this.addProcesses(
-                this.dustProcess(Material.COAL, 7, ChatColor.DARK_GRAY + "Macerated coal", "iron", advanced, 450),
                 this.dustProcess(Material.IRON_ORE, 7, ChatColor.GRAY + "Iron dust", "iron", advanced, 450),
                 this.dustProcess(Material.GOLD_ORE, 11, ChatColor.YELLOW + "Gold dust", "gold", advanced, 670),
                 this.dustProcess(Material.EMERALD_ORE, 10, ChatColor.GREEN + "Emerald dust", "emerald", advanced, 800),

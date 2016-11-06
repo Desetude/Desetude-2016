@@ -30,7 +30,7 @@ public class MachineListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         Location location = event.getBlock().getLocation();
         Optional<Machine> optMachine = MachineFactory.getMachine(location);
-        if(!optMachine.isPresent()) {
+        if (!optMachine.isPresent()) {
             return;
         }
 
