@@ -122,3 +122,27 @@ How to use
 
  7. If there are no issues, you should start recieving output in the top right slot.
  ![Output](https://i.imgur.com/qnKl096.png)
+
+API
+===
+####Creating a machine
+
+To create a machine you must implement Machine, or you can just simply extend SimpleMachine for a simple implementation. e.g:
+
+   ```java
+   public class CompressorMachine extends SimpleMachine {
+	    public CompressorMachine(Location location) {
+	        super("Compressor", ChatColor.GREEN + "Compressor", 1, location); //Title, formatted name, fuelMultiplier, location
+	    }
+    }
+    ```
+
+ To add a recipes/processes to your machine you must first create a Process using any of the `Process.create` methoods and then in your machine add the recipes with SimpleMachine#addProcesses(Process...).
+
+####Registering a machine
+ 
+ To register a machine simply do `MachineFactory.registerMachine(key, machineSupplier)`
+
+####Giving machines
+
+A machine can be represented by any item, the only way a machine is indentified is by the NBT String tag with the value of the key of the machine. This can be set with the ItemStackBuilder `stringTag(key, value)` method or with the `NBTUtils.getTag(nmsItem).setString(key, value)` function.
